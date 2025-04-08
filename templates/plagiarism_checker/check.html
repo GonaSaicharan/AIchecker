@@ -1,0 +1,45 @@
+{% extends "plagiarism_checker/base.html" %}
+
+{% block content %}
+<div class="container">
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="textInput" class="form-label">Enter text to analyze (minimum 100 words):</label>
+            <textarea class="form-control" id="textInput" name="text" rows="10" required oninput="updateWordCount()">{{ text }}</textarea>
+            <div id="wordCount" class="form-text">Word count: 0</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Analyze Text</button>
+    </form>
+</div>
+
+<script>
+    function updateWordCount() {
+        const textarea = document.getElementById('textInput');
+        const wordCountElement = document.getElementById('wordCount');
+        const text = textarea.value.trim();
+
+        // Count words (split by whitespace and filter out empty strings)
+        const wordCount = text === '' ? 0 : text.split(/\s+/).length;
+
+        // Update the display
+        wordCountElement.textContent = `Word count: ${wordCount}`;
+
+        // Optionally add warning if below minimum
+        if (wordCount < 100) {
+            wordCountElement.style.color = 'red';
+        } else {
+            wordCountElement.style.color = '';
+        }
+    }
+
+    // Initialize word count on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        updateWordCount();
+    });
+</script>
+{% endblock %}

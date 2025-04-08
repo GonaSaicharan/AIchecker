@@ -1,0 +1,430 @@
+2025-04-07 09:18:56,904 - plagiarism_checker.views - INFO - Initializing roberta-base-openai...
+2025-04-07 09:18:58,393 - plagiarism_checker.views - INFO - roberta-base-openai initialized successfully
+2025-04-07 09:18:58,393 - plagiarism_checker.views - INFO - Initializing chatgpt-detector-roberta...
+2025-04-07 09:18:59,860 - plagiarism_checker.views - INFO - chatgpt-detector-roberta initialized successfully
+2025-04-07 09:18:59,873 - plagiarism_checker.views - INFO - Initializing detector-xlm-roberta...
+2025-04-07 09:19:00,131 - plagiarism_checker.views - ERROR - Failed to initialize detector-xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 09:19:00,316 - plagiarism_checker.views - ERROR - Traceback (most recent call last):
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\utils\_http.py", line 409, in hf_raise_for_status
+    response.raise_for_status()
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\requests\models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/elozano/ai-detector-xlm-roberta/resolve/main/tokenizer_config.json
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\utils\hub.py", line 424, in cached_files
+    hf_hub_download(
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\utils\_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 862, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 969, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 1486, in _raise_on_head_call_error
+    raise head_call_error
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 1376, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\utils\_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 1296, in get_hf_file_metadata
+    r = _request_wrapper(
+        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 280, in _request_wrapper
+    response = _request_wrapper(
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 304, in _request_wrapper
+    hf_raise_for_status(response)
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\utils\_http.py", line 458, in hf_raise_for_status
+    raise _format(RepositoryNotFoundError, message, response) from e
+huggingface_hub.errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-67f34b2c-21831d2313dbb00f20c0f3dd;9b26c733-0aba-46cb-9107-46804725f839)
+
+Repository Not Found for url: https://huggingface.co/elozano/ai-detector-xlm-roberta/resolve/main/tokenizer_config.json.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated.
+Invalid username or password.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py", line 62, in initialize_models
+    model_cfg['tokenizer'] = AutoTokenizer.from_pretrained(model_cfg['model_name'])
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\models\auto\tokenization_auto.py", line 910, in from_pretrained
+    tokenizer_config = get_tokenizer_config(pretrained_model_name_or_path, **kwargs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\models\auto\tokenization_auto.py", line 742, in get_tokenizer_config
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\utils\hub.py", line 266, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\utils\hub.py", line 456, in cached_files
+    raise EnvironmentError(
+OSError: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+
+2025-04-07 09:19:00,318 - plagiarism_checker.views - INFO - Initializing gpt2-detector...
+2025-04-07 09:20:08,620 - plagiarism_checker.views - INFO - gpt2-detector initialized successfully
+2025-04-07 09:35:23,066 - django.utils.autoreload - INFO - C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py changed, reloading.
+2025-04-07 09:35:42,003 - plagiarism_checker.views - INFO - Loading roberta-openai...
+2025-04-07 09:35:43,707 - plagiarism_checker.views - INFO - roberta-openai loaded successfully
+2025-04-07 09:35:43,707 - plagiarism_checker.views - INFO - Loading chatgpt-detector...
+2025-04-07 09:35:45,186 - plagiarism_checker.views - INFO - chatgpt-detector loaded successfully
+2025-04-07 09:35:45,187 - plagiarism_checker.views - INFO - Loading xlm-roberta...
+2025-04-07 09:35:45,467 - plagiarism_checker.views - ERROR - Failed to load xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 09:35:45,467 - plagiarism_checker.views - INFO - Loading gpt2-detector...
+2025-04-07 09:35:49,833 - plagiarism_checker.views - INFO - gpt2-detector loaded successfully
+2025-04-07 09:36:25,861 - plagiarism_checker.views - INFO - Loading roberta-openai...
+2025-04-07 09:36:27,584 - plagiarism_checker.views - INFO - roberta-openai loaded successfully
+2025-04-07 09:36:27,584 - plagiarism_checker.views - INFO - Loading chatgpt-detector...
+2025-04-07 09:36:29,461 - plagiarism_checker.views - INFO - chatgpt-detector loaded successfully
+2025-04-07 09:36:29,461 - plagiarism_checker.views - INFO - Loading xlm-roberta...
+2025-04-07 09:36:29,713 - plagiarism_checker.views - ERROR - Failed to load xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 09:36:29,713 - plagiarism_checker.views - INFO - Loading gpt2-detector...
+2025-04-07 09:36:34,522 - plagiarism_checker.views - INFO - gpt2-detector loaded successfully
+2025-04-07 09:36:48,998 - plagiarism_checker.views - ERROR - Endpoint error: 'weight'
+2025-04-07 09:36:49,000 - plagiarism_checker.views - ERROR - Traceback (most recent call last):
+  File "C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py", line 332, in check_plagiarism
+    'weight': f"{model['weight']:.2f}"
+                 ~~~~~^^^^^^^^^^
+KeyError: 'weight'
+
+2025-04-07 09:36:58,393 - plagiarism_checker.views - ERROR - Endpoint error: 'weight'
+2025-04-07 09:36:58,394 - plagiarism_checker.views - ERROR - Traceback (most recent call last):
+  File "C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py", line 332, in check_plagiarism
+    'weight': f"{model['weight']:.2f}"
+                 ~~~~~^^^^^^^^^^
+KeyError: 'weight'
+
+2025-04-07 09:39:45,519 - django.utils.autoreload - INFO - C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py changed, reloading.
+2025-04-07 09:40:02,276 - plagiarism_checker.views - INFO - Initializing roberta-openai...
+2025-04-07 09:40:03,853 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 09:40:03,853 - plagiarism_checker.views - INFO - Initializing chatgpt-detector...
+2025-04-07 09:40:05,532 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 09:40:05,532 - plagiarism_checker.views - INFO - Initializing xlm-roberta...
+2025-04-07 09:40:05,778 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 09:40:05,785 - plagiarism_checker.views - ERROR - Traceback (most recent call last):
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\utils\_http.py", line 409, in hf_raise_for_status
+    response.raise_for_status()
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\requests\models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/elozano/ai-detector-xlm-roberta/resolve/main/tokenizer_config.json
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\utils\hub.py", line 424, in cached_files
+    hf_hub_download(
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\utils\_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 862, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 969, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 1486, in _raise_on_head_call_error
+    raise head_call_error
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 1376, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\utils\_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 1296, in get_hf_file_metadata
+    r = _request_wrapper(
+        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 280, in _request_wrapper
+    response = _request_wrapper(
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\file_download.py", line 304, in _request_wrapper
+    hf_raise_for_status(response)
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\huggingface_hub\utils\_http.py", line 458, in hf_raise_for_status
+    raise _format(RepositoryNotFoundError, message, response) from e
+huggingface_hub.errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-67f3501d-73235fb26ef888706c08d851;5d21d7e7-7f58-419e-a529-53217660fef2)
+
+Repository Not Found for url: https://huggingface.co/elozano/ai-detector-xlm-roberta/resolve/main/tokenizer_config.json.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated.
+Invalid username or password.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py", line 49, in <module>
+    model_cfg['tokenizer'] = AutoTokenizer.from_pretrained(model_cfg['model_name'])
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\models\auto\tokenization_auto.py", line 910, in from_pretrained
+    tokenizer_config = get_tokenizer_config(pretrained_model_name_or_path, **kwargs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\models\auto\tokenization_auto.py", line 742, in get_tokenizer_config
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\utils\hub.py", line 266, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\saich\PycharmProjects\AIchecker\.venv\Lib\site-packages\transformers\utils\hub.py", line 456, in cached_files
+    raise EnvironmentError(
+OSError: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+
+2025-04-07 09:47:10,402 - django.utils.autoreload - INFO - C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py changed, reloading.
+2025-04-07 09:47:28,183 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-07 09:47:30,071 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 09:47:30,071 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-07 09:47:31,773 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 09:47:31,773 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 1)...
+2025-04-07 09:47:32,127 - plagiarism_checker.views - ERROR - Attempt 1 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 09:47:34,128 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 2)...
+2025-04-07 09:47:34,432 - plagiarism_checker.views - ERROR - Attempt 2 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 09:47:34,432 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta after 2 attempts
+2025-04-07 09:53:07,192 - django.utils.autoreload - INFO - C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py changed, reloading.
+2025-04-07 09:53:24,739 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-07 09:53:26,955 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 09:53:26,955 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-07 09:53:28,730 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 09:56:34,163 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-07 09:56:36,673 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 09:56:36,673 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-07 09:56:38,271 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 22:26:43,467 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-07 22:26:46,358 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 22:26:46,359 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-07 22:26:48,628 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 22:27:04,964 - django.request - WARNING - Not Found: /favicon.ico
+2025-04-07 22:45:16,350 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-04-07 22:45:16,351 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-07 22:45:30,298 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-07 22:45:31,655 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 22:45:31,655 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-07 22:45:33,674 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 22:45:33,674 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 1)...
+2025-04-07 22:45:33,923 - plagiarism_checker.views - ERROR - Attempt 1 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:45:34,924 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 2)...
+2025-04-07 22:45:35,152 - plagiarism_checker.views - ERROR - Attempt 2 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:45:37,152 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 3)...
+2025-04-07 22:45:37,435 - plagiarism_checker.views - ERROR - Attempt 3 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:45:37,435 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta after 3 attempts
+2025-04-07 22:45:37,435 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 1)...
+2025-04-07 22:45:37,669 - plagiarism_checker.views - ERROR - Attempt 1 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:45:38,670 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 2)...
+2025-04-07 22:45:38,899 - plagiarism_checker.views - ERROR - Attempt 2 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:45:40,900 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 3)...
+2025-04-07 22:45:41,218 - plagiarism_checker.views - ERROR - Attempt 3 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:45:41,218 - plagiarism_checker.views - ERROR - Failed to initialize deberta-v3 after 3 attempts
+2025-04-07 22:45:41,219 - plagiarism_checker.views - INFO - Initializing gpt2-detector (attempt 1)...
+2025-04-07 22:45:43,140 - plagiarism_checker.views - INFO - gpt2-detector initialized successfully
+2025-04-07 22:56:32,339 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-04-07 22:56:32,339 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-07 22:56:36,482 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-07 22:56:37,878 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 22:56:37,878 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-07 22:56:40,134 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 22:56:40,135 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 1)...
+2025-04-07 22:56:40,368 - plagiarism_checker.views - ERROR - Attempt 1 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:56:41,370 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 2)...
+2025-04-07 22:56:41,742 - plagiarism_checker.views - ERROR - Attempt 2 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:56:43,743 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 3)...
+2025-04-07 22:56:44,009 - plagiarism_checker.views - ERROR - Attempt 3 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:56:44,010 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta after 3 attempts
+2025-04-07 22:56:44,010 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 1)...
+2025-04-07 22:56:44,238 - plagiarism_checker.views - ERROR - Attempt 1 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:56:45,241 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 2)...
+2025-04-07 22:56:45,519 - plagiarism_checker.views - ERROR - Attempt 2 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:56:47,521 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 3)...
+2025-04-07 22:56:47,874 - plagiarism_checker.views - ERROR - Attempt 3 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 22:56:47,875 - plagiarism_checker.views - ERROR - Failed to initialize deberta-v3 after 3 attempts
+2025-04-07 22:56:47,875 - plagiarism_checker.views - INFO - Initializing gpt2-detector (attempt 1)...
+2025-04-07 22:56:49,236 - plagiarism_checker.views - INFO - gpt2-detector initialized successfully
+2025-04-07 23:04:23,402 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-04-07 23:04:23,402 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-07 23:04:27,778 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-07 23:04:29,057 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 23:04:29,057 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-07 23:04:31,472 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 23:04:31,473 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 1)...
+2025-04-07 23:04:31,732 - plagiarism_checker.views - ERROR - Attempt 1 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:04:32,733 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 2)...
+2025-04-07 23:04:32,997 - plagiarism_checker.views - ERROR - Attempt 2 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:04:34,998 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 3)...
+2025-04-07 23:04:35,356 - plagiarism_checker.views - ERROR - Attempt 3 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:04:35,358 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta after 3 attempts
+2025-04-07 23:04:35,358 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 1)...
+2025-04-07 23:04:35,636 - plagiarism_checker.views - ERROR - Attempt 1 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:04:36,637 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 2)...
+2025-04-07 23:04:36,890 - plagiarism_checker.views - ERROR - Attempt 2 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:04:38,891 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 3)...
+2025-04-07 23:04:39,143 - plagiarism_checker.views - ERROR - Attempt 3 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:04:39,144 - plagiarism_checker.views - ERROR - Failed to initialize deberta-v3 after 3 attempts
+2025-04-07 23:04:39,144 - plagiarism_checker.views - INFO - Initializing gpt2-detector (attempt 1)...
+2025-04-07 23:04:40,463 - plagiarism_checker.views - INFO - gpt2-detector initialized successfully
+2025-04-07 23:44:49,828 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-04-07 23:44:49,829 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-07 23:44:53,863 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-07 23:44:55,159 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 23:44:55,160 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-07 23:44:56,864 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 23:44:56,865 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 1)...
+2025-04-07 23:44:57,105 - plagiarism_checker.views - ERROR - Attempt 1 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:44:58,107 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 2)...
+2025-04-07 23:44:58,335 - plagiarism_checker.views - ERROR - Attempt 2 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:45:00,336 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 3)...
+2025-04-07 23:45:00,615 - plagiarism_checker.views - ERROR - Attempt 3 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:45:00,615 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta after 3 attempts
+2025-04-07 23:45:00,615 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 1)...
+2025-04-07 23:45:00,842 - plagiarism_checker.views - ERROR - Attempt 1 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:45:01,843 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 2)...
+2025-04-07 23:45:02,151 - plagiarism_checker.views - ERROR - Attempt 2 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:45:04,152 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 3)...
+2025-04-07 23:45:04,393 - plagiarism_checker.views - ERROR - Attempt 3 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:45:04,394 - plagiarism_checker.views - ERROR - Failed to initialize deberta-v3 after 3 attempts
+2025-04-07 23:45:04,394 - plagiarism_checker.views - INFO - Initializing gpt2-detector (attempt 1)...
+2025-04-07 23:45:05,715 - plagiarism_checker.views - INFO - gpt2-detector initialized successfully
+2025-04-07 23:49:38,890 - django.utils.autoreload - INFO - C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py changed, reloading.
+2025-04-07 23:49:56,034 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-04-07 23:49:56,035 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-07 23:50:00,975 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-07 23:50:02,223 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-07 23:50:02,224 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-07 23:50:04,005 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-07 23:50:04,005 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 1)...
+2025-04-07 23:50:04,237 - plagiarism_checker.views - ERROR - Attempt 1 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:50:05,238 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 2)...
+2025-04-07 23:50:05,467 - plagiarism_checker.views - ERROR - Attempt 2 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:50:07,468 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 3)...
+2025-04-07 23:50:07,728 - plagiarism_checker.views - ERROR - Attempt 3 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:50:07,728 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta after 3 attempts
+2025-04-07 23:50:07,728 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 1)...
+2025-04-07 23:50:07,962 - plagiarism_checker.views - ERROR - Attempt 1 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:50:08,964 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 2)...
+2025-04-07 23:50:09,367 - plagiarism_checker.views - ERROR - Attempt 2 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:50:11,367 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 3)...
+2025-04-07 23:50:11,618 - plagiarism_checker.views - ERROR - Attempt 3 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-07 23:50:11,619 - plagiarism_checker.views - ERROR - Failed to initialize deberta-v3 after 3 attempts
+2025-04-07 23:50:11,619 - plagiarism_checker.views - INFO - Initializing gpt2-detector (attempt 1)...
+2025-04-07 23:50:12,876 - plagiarism_checker.views - INFO - gpt2-detector initialized successfully
+2025-04-08 09:03:08,678 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-04-08 09:03:08,678 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-08 09:03:13,202 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-08 09:03:15,212 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-08 09:03:15,212 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-08 09:03:17,300 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-08 09:03:17,300 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 1)...
+2025-04-08 09:03:17,539 - plagiarism_checker.views - ERROR - Attempt 1 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 09:03:18,546 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 2)...
+2025-04-08 09:03:18,786 - plagiarism_checker.views - ERROR - Attempt 2 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 09:03:20,787 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 3)...
+2025-04-08 09:03:21,016 - plagiarism_checker.views - ERROR - Attempt 3 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 09:03:21,016 - plagiarism_checker.views - ERROR - Failed to initialize deberta-v3 after 3 attempts
+2025-04-08 09:03:21,016 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 1)...
+2025-04-08 09:03:21,244 - plagiarism_checker.views - ERROR - Attempt 1 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 09:03:22,250 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 2)...
+2025-04-08 09:03:22,637 - plagiarism_checker.views - ERROR - Attempt 2 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 09:03:24,638 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 3)...
+2025-04-08 09:03:25,285 - plagiarism_checker.views - ERROR - Attempt 3 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 09:03:25,285 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta after 3 attempts
+2025-04-08 09:03:30,593 - django.request - WARNING - Not Found: /favicon.ico
+2025-04-08 10:44:01,991 - django.utils.autoreload - INFO - C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py changed, reloading.
+2025-04-08 10:44:27,040 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-04-08 10:44:27,041 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-08 10:44:30,187 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-08 10:44:31,008 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-08 10:44:31,008 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-08 10:44:32,358 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-08 10:44:32,358 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 1)...
+2025-04-08 10:44:32,594 - plagiarism_checker.views - ERROR - Attempt 1 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:44:33,595 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 2)...
+2025-04-08 10:44:33,828 - plagiarism_checker.views - ERROR - Attempt 2 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:44:35,829 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 3)...
+2025-04-08 10:44:36,057 - plagiarism_checker.views - ERROR - Attempt 3 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:44:36,057 - plagiarism_checker.views - ERROR - Failed to initialize deberta-v3 after 3 attempts
+2025-04-08 10:44:36,057 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 1)...
+2025-04-08 10:44:36,304 - plagiarism_checker.views - ERROR - Attempt 1 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:44:37,305 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 2)...
+2025-04-08 10:44:37,534 - plagiarism_checker.views - ERROR - Attempt 2 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:44:39,535 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 3)...
+2025-04-08 10:44:39,765 - plagiarism_checker.views - ERROR - Attempt 3 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:44:39,765 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta after 3 attempts
+2025-04-08 10:53:01,624 - django.utils.autoreload - INFO - C:\Users\saich\PycharmProjects\AIchecker\plagiarism_checker\views.py changed, reloading.
+2025-04-08 10:53:09,235 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-04-08 10:53:09,235 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-08 10:53:12,567 - plagiarism_checker.views - INFO - Initializing roberta-openai (attempt 1)...
+2025-04-08 10:53:13,325 - plagiarism_checker.views - INFO - roberta-openai initialized successfully
+2025-04-08 10:53:13,325 - plagiarism_checker.views - INFO - Initializing chatgpt-detector (attempt 1)...
+2025-04-08 10:53:14,409 - plagiarism_checker.views - INFO - chatgpt-detector initialized successfully
+2025-04-08 10:53:14,409 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 1)...
+2025-04-08 10:53:14,653 - plagiarism_checker.views - ERROR - Attempt 1 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:53:15,654 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 2)...
+2025-04-08 10:53:15,887 - plagiarism_checker.views - ERROR - Attempt 2 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:53:17,888 - plagiarism_checker.views - INFO - Initializing xlm-roberta (attempt 3)...
+2025-04-08 10:53:18,111 - plagiarism_checker.views - ERROR - Attempt 3 failed for xlm-roberta: elozano/ai-detector-xlm-roberta is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:53:18,111 - plagiarism_checker.views - ERROR - Failed to initialize xlm-roberta after 3 attempts
+2025-04-08 10:53:18,111 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 1)...
+2025-04-08 10:53:18,341 - plagiarism_checker.views - ERROR - Attempt 1 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:53:19,350 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 2)...
+2025-04-08 10:53:19,584 - plagiarism_checker.views - ERROR - Attempt 2 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:53:21,585 - plagiarism_checker.views - INFO - Initializing deberta-v3 (attempt 3)...
+2025-04-08 10:53:21,819 - plagiarism_checker.views - ERROR - Attempt 3 failed for deberta-v3: microsoft/deberta-v3-base-openai-detector is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-04-08 10:53:21,819 - plagiarism_checker.views - ERROR - Failed to initialize deberta-v3 after 3 attempts
+2025-04-08 10:53:21,819 - plagiarism_checker.views - INFO - Initializing gpt2-detector (attempt 1)...
+2025-04-08 10:53:23,095 - plagiarism_checker.views - INFO - gpt2-detector initialized successfully

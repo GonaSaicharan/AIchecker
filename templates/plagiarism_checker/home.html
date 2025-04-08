@@ -1,0 +1,35 @@
+{% extends "plagiarism_checker/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">Welcome to AI Plagiarism Checker</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Check your text for potential plagiarism against online sources.</p>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'check_plagiarism' %}" class="btn btn-lg btn-primary">
+                        Start Plagiarism Check
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3>How It Works</h3>
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li>Enter or paste your text into the checker</li>
+                    <li>Our system searches the web for similar content</li>
+                    <li>We analyze matches using advanced algorithms</li>
+                    <li>You receive a detailed similarity report</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

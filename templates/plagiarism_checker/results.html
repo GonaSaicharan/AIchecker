@@ -1,0 +1,120 @@
+{% extends "plagiarism_checker/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="card mt-4 border-{{ results.risk_class }}">
+        <div class="card-header bg-{{ results.risk_class }} text-white">
+            <h3>Analysis Results - {{ results.risk_level }}</h3>
+            <h4>{{ results.score }}% AI Probability ({{ results.risk_probability }})</h4>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-{{ results.risk_class }}">
+                <h4>{{ results.risk_description }}</h4>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Detection Indicators</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {% for indicator in results.indicators %}
+                                <li class="list-group-item">{{ indicator }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Text Statistics</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">Words: {{ results.word_count }}</li>
+                                <li class="list-group-item">Sentences: {{ results.sentence_count }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if detailed_report %}
+            <div class="mt-4">
+                <h4>Detailed Analysis Report</h4>
+                {% if detailed_report.warnings %}
+                <div class="alert alert-warning">
+                    {% for warning in detailed_report.warnings %}
+                    <p>{{ warning }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Model Scores</h5>
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Score</th>
+                                    <th>Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for model in detailed_report.model_details %}
+                                <tr>
+                                    <td>{{ model.name }}</td>
+                                    <td>{{ model.score }}</td>
+                                    <td>{{ model.weight }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Feature Scores</h5>
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Perplexity</td>
+                                    <td>{{ detailed_report.feature_scores.perplexity }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Burstiness</td>
+                                    <td>{{ detailed_report.feature_scores.burstiness }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Repetition</td>
+                                    <td>{{ detailed_report.feature_scores.repetition }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Formality</td>
+                                    <td>{{ detailed_report.feature_scores.formality }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="mt-4">
+                <a href="{% url 'check_plagiarism' %}" class="btn btn-primary">
+                    Analyze Another Text
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
