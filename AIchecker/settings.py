@@ -92,10 +92,9 @@ USE_TZ = True
 
 # Add these at the bottom of settings.py
 # Add these at the bottom of settings.py
+# settings.py
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Add this line
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # For _redirects file
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

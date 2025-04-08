@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aeb1f573-bd61-4f8b-af1a-6586b0bda101" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/AIchecker.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AIchecker/netlify.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism_checker/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism_checker/templatetags/custom_filters.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism_checker/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/plagiarism_checker/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/plagiarism_checker/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/plagiarism_checker/results.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_api.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/netlify.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AIchecker/netlify.toml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +28,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GonaSaicharan"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/GonaSaicharan/AIchecker.git",
+    "accountId": "c9ef6783-bda1-45dc-b0b7-a096f7abd75e"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -133,7 +132,7 @@
       <workItem from="1743912394806" duration="6892000" />
       <workItem from="1743996556131" duration="3611000" />
       <workItem from="1744044747972" duration="4889000" />
-      <workItem from="1744082654806" duration="3864000" />
+      <workItem from="1744082654806" duration="7225000" />
     </task>
     <servers />
   </component>
