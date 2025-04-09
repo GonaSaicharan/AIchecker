@@ -4,11 +4,11 @@ A Django-based web application that analyzes text to detect AI-generated content
 
 ## Screenshots 🖼️
 | Home Page | 
-![image alt](https://github.com/GonaSaicharan/AIchecker/blob/94bac9b02a5f9a3fca4ea3ae3cb9ba1747776112/home.png)
+![image alt](https://github.com/GonaSaicharan/AIchecker/blob/7810b4d3b4c1592ca62c22726d3287a4b99fa609/home.png)
 | Text Input |
-![image alt](https://github.com/GonaSaicharan/AIchecker/blob/94bac9b02a5f9a3fca4ea3ae3cb9ba1747776112/textinput.png)
+![image alt](https://github.com/GonaSaicharan/AIchecker/blob/7810b4d3b4c1592ca62c22726d3287a4b99fa609/textinput.png)
 | Results |
-![image alt](https://github.com/GonaSaicharan/AIchecker/blob/94bac9b02a5f9a3fca4ea3ae3cb9ba1747776112/results.png)
+![image alt](https://github.com/GonaSaicharan/AIchecker/blob/7810b4d3b4c1592ca62c22726d3287a4b99fa609/results.png)
 
 ## Features ✨
 - **Multi-model analysis** (5+ detection algorithms)
