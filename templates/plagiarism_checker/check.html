@@ -23,12 +23,10 @@
         const wordCountElement = document.getElementById('wordCount');
         const text = textarea.value.trim();
 
-
         const wordCount = text === '' ? 0 : text.split(/\s+/).length;
 
 
         wordCountElement.textContent = `Word count: ${wordCount}`;
-
 
         if (wordCount < 100) {
             wordCountElement.style.color = 'red';
@@ -36,7 +34,6 @@
             wordCountElement.style.color = '';
         }
     }
-
 
     document.addEventListener('DOMContentLoaded', function() {
         updateWordCount();
