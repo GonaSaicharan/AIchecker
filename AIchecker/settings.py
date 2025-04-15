@@ -7,21 +7,18 @@ from pathlib import Path
 import os
 import sys
 
-# ✅ Correct BASE_DIR definition
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 print(sys.path)
 print("BASE_DIR type:", type(BASE_DIR))  # Debugging
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-cqw#+-w582ux!)kkfpkzrip7=m4^!5t=d#l$87%5^q@ho_7mbl'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,14 +43,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'AIchecker.urls'
 
-# In your AIchecker/settings.py
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),  # Project-level templates
-            os.path.join(BASE_DIR, 'plagiarism_checker/templates'),  # App-level templates
+            os.path.join(BASE_DIR, 'templates'),  
+            os.path.join(BASE_DIR, 'plagiarism_checker/templates'), 
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -70,11 +66,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'AIchecker.wsgi.application'
 
-# ✅ Fix database settings
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),  # ✅ Convert Path to str
+        'NAME': str(BASE_DIR / 'db.sqlite3'),  
     }
 }
 
@@ -90,11 +85,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Add these at the bottom of settings.py
-# Add these at the bottom of settings.py
-# settings.py
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # For _redirects file
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
