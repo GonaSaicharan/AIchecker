@@ -2,33 +2,145 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-8 mx-auto">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h2 class="mb-0">Welcome to AI Plagiarism Checker</h2>
+    <div class="col-lg-10 mx-auto">
+   
+        <div class="card border-0 shadow-lg mb-5">
+            <div class="card-header bg-gradient-primary text-white py-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="h3 mb-0"><i class="fas fa-robot me-2"></i> AI Content Detector Pro</h1>
+                    <span class="badge bg-white text-primary">v2.3</span>
+                </div>
             </div>
-            <div class="card-body">
-                <p class="lead">Check your text for potential plagiarism against online sources.</p>
-                <div class="d-grid gap-2">
-                    <a href="{% url 'check_plagiarism' %}" class="btn btn-lg btn-primary">
-                        Start Plagiarism Check
+            <div class="card-body text-center py-5">
+                <h2 class="display-6 mb-4">Detect AI-Generated Content</h2>
+                <p class="lead mb-4">Our advanced system analyzes text using multiple detection models and linguistic patterns to identify AI-generated content.</p>
+
+                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                    <a href="{% url 'check_plagiarism' %}" class="btn btn-primary btn-lg px-4 gap-3">
+                        <i class="fas fa-play me-2"></i> Start Analysis Now
                     </a>
+                    <a href="#how-it-works" class="btn btn-outline-secondary btn-lg px-4">
+                        <i class="fas fa-info-circle me-2"></i> Learn More
+                    </a>
+                </div>
+
+                <div class="mt-4">
+                    <span class="text-muted">
+                        <i class="fas fa-shield-alt me-1"></i> Secure processing • No data storage
+                    </span>
                 </div>
             </div>
         </div>
-        
-        <div class="card mt-4">
-            <div class="card-header">
-                <h3>How It Works</h3>
+
+        <div id="how-it-works" class="card shadow-sm mb-5">
+            <div class="card-header bg-white border-bottom-0 pt-4">
+                <h3 class="h4 mb-0">
+                    <i class="fas fa-cogs text-primary me-2"></i> How Our Detection System Works
+                </h3>
             </div>
             <div class="card-body">
-                <ol>
-                    <li>Enter or paste your text into the checker</li>
-                    <li>Our system searches the web for similar content</li>
-                    <li>We analyze matches using advanced algorithms</li>
-                    <li>You receive a detailed similarity report</li>
-                </ol>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <div class="me-4">
+                                <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="h5 mb-0">1</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="h5">Text Submission</h4>
+                                <p class="mb-0">Paste your content (minimum 200 characters) for comprehensive analysis. Our system supports multiple languages.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <div class="me-4">
+                                <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="h5 mb-0">2</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="h5">Multi-Model Analysis</h4>
+                                <p class="mb-0">Our ensemble of 5 specialized AI models (including RoBERTa and DeBERTa) processes your text simultaneously.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <div class="me-4">
+                                <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="h5 mb-0">3</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="h5">Linguistic Profiling</h4>
+                                <p class="mb-0">We examine 12+ linguistic features including perplexity, burstiness, and semantic coherence patterns.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <div class="me-4">
+                                <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <span class="h5 mb-0">4</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="h5">Comprehensive Report</h4>
+                                <p class="mb-0">Receive a detailed breakdown with AI probability score, confidence level, and specific detection indicators.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div class="card shadow-sm mb-5">
+            <div class="card-header bg-white border-bottom-0">
+                <h3 class="h4 mb-0">
+                    <i class="fas fa-star text-warning me-2"></i> Key Detection Features
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="p-3 h-100 border rounded">
+                            <h4 class="h5"><i class="fas fa-brain text-info me-2"></i> Perplexity Analysis</h4>
+                            <p>Measures word choice unpredictability - AI text tends to have lower lexical diversity.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="p-3 h-100 border rounded">
+                            <h4 class="h5"><i class="fas fa-wave-square text-success me-2"></i> Burstiness Scoring</h4>
+                            <p>Detects unnatural sentence length patterns common in AI-generated content.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="p-3 h-100 border rounded">
+                            <h4 class="h5"><i class="fas fa-project-diagram text-danger me-2"></i> Semantic Flow</h4>
+                            <p>Analyzes paragraph coherence and idea transitions using sentence embeddings.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="p-3 h-100 border rounded">
+                            <h4 class="h5"><i class="fas fa-robot text-purple me-2"></i> AI Patterns</h4>
+                            <p>Identifies common AI phrases like "As an AI model" or overly formal constructions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  
+        <div class="text-center py-4">
+            <h3 class="h4 mb-3">Ready to check your content?</h3>
+            <a href="{% url 'check_plagiarism' %}" class="btn btn-primary btn-lg px-5">
+                <i class="fas fa-play-circle me-2"></i> Analyze Text Now
+            </a>
         </div>
     </div>
 </div>
