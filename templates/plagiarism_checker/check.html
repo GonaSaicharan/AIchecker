@@ -23,13 +23,13 @@
         const wordCountElement = document.getElementById('wordCount');
         const text = textarea.value.trim();
 
-        // Count words (split by whitespace and filter out empty strings)
+
         const wordCount = text === '' ? 0 : text.split(/\s+/).length;
 
-        // Update the display
+
         wordCountElement.textContent = `Word count: ${wordCount}`;
 
-        // Optionally add warning if below minimum
+
         if (wordCount < 100) {
             wordCountElement.style.color = 'red';
         } else {
@@ -37,7 +37,7 @@
         }
     }
 
-    // Initialize word count on page load
+
     document.addEventListener('DOMContentLoaded', function() {
         updateWordCount();
     });
