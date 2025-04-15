@@ -9,9 +9,9 @@ import re
 import logging
 import traceback
 from scipy.stats import entropy
-from sentence_transformers import SentenceTransformer  # New import
+from sentence_transformers import SentenceTransformer  
 
-# Configure comprehensive logging
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -19,14 +19,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# ======================
-# SUPERCHARGED MODEL CONFIGURATION
-# ======================
+
 DETECTION_MODELS = [
     {
         'name': 'roberta-openai',
         'model_name': "openai-community/roberta-base-openai-detector",
-        'weight': 0.30,  # Adjusted weight
+        'weight': 0.30, 
         'type': 'transformers',
         'ai_class_index': 1,
         'trust_threshold': 0.80
@@ -34,7 +32,7 @@ DETECTION_MODELS = [
     {
         'name': 'chatgpt-detector',
         'model_name': "Hello-SimpleAI/chatgpt-detector-roberta",
-        'weight': 0.30,  # Adjusted weight
+        'weight': 0.30,  
         'type': 'transformers',
         'ai_class_index': 1,
         'trust_threshold': 0.85
@@ -42,7 +40,7 @@ DETECTION_MODELS = [
     {
         'name': 'xlm-roberta',
         'model_name': "elozano/ai-detector-xlm-roberta",
-        'weight': 0.15,  # Reduced weight
+        'weight': 0.15,  
         'type': 'transformers',
         'ai_class_index': 0
     },
@@ -63,14 +61,14 @@ DETECTION_MODELS = [
     }
 ]
 
-# Initialize sentence transformer (loaded once)
+
 SEMANTIC_MODEL = SentenceTransformer('all-MiniLM-L6-v2')
 
-# Initialize models with enhanced error handling
+
 def initialize_models():
-    """Safe model initialization with retry logic"""
+
     for model_cfg in DETECTION_MODELS:
-        max_retries = 3  # Increased retries
+        max_retries = 3 
         for attempt in range(max_retries):
             try:
                 logger.info(f"Initializing {model_cfg['name']} (attempt {attempt + 1})...")
@@ -89,7 +87,7 @@ def initialize_models():
                 
                 # Enhanced validation
                 test_input = model_cfg['tokenizer'](
-                    "Test input " * 50,  # Longer test input
+                    "Test input " * 50, 
                     return_tensors="pt",
                     truncation=True,
                     max_length=512
@@ -112,22 +110,19 @@ def initialize_models():
                     model_cfg['model'] = None
                 else:
                     import time
-                    time.sleep(2 ** attempt)  # Exponential backoff
+                    time.sleep(2 ** attempt)  
 
 initialize_models()
 
-# ======================
-# MILITARY-GRADE PREDICTION
-# ======================
 def get_model_prediction(model_cfg, text):
     """Ultra-robust model prediction with confidence scoring"""
     if model_cfg['model'] is None:
-        return None, 0  # Return confidence score
+        return None, 0 
         
     try:
-        # Enhanced tokenization with length checks
+    
         inputs = model_cfg['tokenizer'](
-            text[:2000],  # Increased buffer
+            text[:2000], 
             return_tensors="pt",
             truncation=True,
             max_length=512,
@@ -138,7 +133,7 @@ def get_model_prediction(model_cfg, text):
         if torch.cuda.is_available():
             inputs = {k: v.to('cuda') for k, v in inputs.items()}
         
-        # Model inference with memory management
+
         try:
             with torch.no_grad():
                 torch.cuda.empty_cache()
@@ -154,8 +149,7 @@ def get_model_prediction(model_cfg, text):
                 raise
         
         logits = outputs.logits
-        
-        # Enhanced scoring with confidence
+ 
         if logits.shape[1] == 1:
             score = torch.sigmoid(logits)[0].item() * 100
             confidence = min(1.0, abs(score - 50) / 50)  # How far from 50%
@@ -163,9 +157,8 @@ def get_model_prediction(model_cfg, text):
             probs = torch.softmax(logits, dim=1)[0]
             ai_index = model_cfg.get('ai_class_index', 1)
             score = probs[ai_index].item() * 100
-            confidence = probs.max().item()  # Max probability
-            
-        # Apply trust threshold
+            confidence = probs.max().item()  
+
         min_confidence = model_cfg.get('trust_threshold', 0.75)
         if confidence < min_confidence:
             logger.warning(f"Low confidence {confidence:.2f} for {model_cfg['name']}")
@@ -178,17 +171,13 @@ def get_model_prediction(model_cfg, text):
         logger.error(traceback.format_exc())
         return None, 0
 
-# ======================
-# ADVANCED TEXT ANALYSIS
-# ======================
 def calculate_perplexity(text):
-    """Enhanced perplexity with n-gram support"""
+  
     try:
         words = [w.lower() for w in word_tokenize(text) if w.isalpha()]
-        if len(words) < 50:  # Increased minimum
+        if len(words) < 50:  
             return 50
-            
-        # Calculate for both unigrams and bigrams
+
         unigram_counts = Counter(words)
         bigrams = [tuple(words[i:i+2]) for i in range(len(words)-1)]
         bigram_counts = Counter(bigrams)
@@ -198,10 +187,9 @@ def calculate_perplexity(text):
         
         uni_probs = [count/total_uni for count in unigram_counts.values()]
         bi_probs = [count/total_bi for count in bigram_counts.values()]
-        
-        # Combined entropy
+     
         text_entropy = (entropy(uni_probs) + entropy(bi_probs)) / 2
-        perplexity = min(100, max(0, 100 - (text_entropy * 8)))  # Adjusted scaling
+        perplexity = min(100, max(0, 100 - (text_entropy * 8))) 
         return perplexity
         
     except Exception as e:
@@ -209,25 +197,24 @@ def calculate_perplexity(text):
         return 50
 
 def calculate_burstiness(text):
-    """Enhanced burstiness with paragraph analysis"""
+
     try:
         paragraphs = [p for p in text.split('\n') if len(p.strip()) > 0]
         sentences = sent_tokenize(text)
         
-        if len(sentences) < 8:  # Higher threshold
+        if len(sentences) < 8:  
             return 50
             
-        # Sentence length analysis
+    
         lengths = [len(word_tokenize(s)) for s in sentences]
         med = np.median(lengths)
         mad = np.median([abs(l - med) for l in lengths])
         modified_zscores = [0.6745 * (l - med) / mad if mad != 0 else 0 for l in lengths]
-        
-        # Paragraph length analysis
+      
         para_lengths = [len(word_tokenize(p)) for p in paragraphs]
         para_std = np.std(para_lengths) if len(para_lengths) > 1 else 0
         
-        # Combined score
+  
         outliers = sum(1 for z in modified_zscores if abs(z) > 3.5)
         burstiness = min(100, max(0, 
             100 - (outliers/len(sentences)) * 70 - (para_std * 30)
@@ -241,11 +228,10 @@ def calculate_burstiness(text):
 def calculate_repetition(text):
     """Enhanced repetition detection with sliding window"""
     try:
-        words = [w.lower() for w in word_tokenize(text) if len(w) > 2]  # Lower threshold
+        words = [w.lower() for w in word_tokenize(text) if len(w) > 2]  
         if len(words) < 50:
             return 0
-            
-        # Check multiple n-gram sizes
+     
         ngram_sizes = [3, 4, 5]
         repetition_score = 0
         
@@ -253,7 +239,7 @@ def calculate_repetition(text):
             ngrams = [tuple(words[i:i+n]) for i in range(len(words)-n+1)]
             counts = Counter(ngrams)
             repeated = sum(1 for cnt in counts.values() if cnt > 1)
-            repetition_score += min(30, (repeated / len(counts)) * 100)  # Cap per n-gram
+            repetition_score += min(30, (repeated / len(counts)) * 100)  
             
         return min(100, repetition_score)
         
@@ -262,7 +248,7 @@ def calculate_repetition(text):
         return 0
 
 def calculate_formality(text):
-    """Enhanced formality with academic markers"""
+
     try:
         formal_phrases = [
             'in conclusion', 'furthermore', 'moreover', 'however', 
@@ -271,7 +257,7 @@ def calculate_formality(text):
             'in light of', 'it can be argued', 'this suggests that'
         ]
         
-        # Count both exact matches and partial matches
+  
         text_lower = text.lower()
         exact_matches = sum(text_lower.count(phrase) for phrase in formal_phrases)
         partial_matches = sum(1 for phrase in formal_phrases if phrase in text_lower)
@@ -282,7 +268,7 @@ def calculate_formality(text):
         return 0
 
 def calculate_semantic_coherence(text):
-    """Detect unnatural flow using sentence embeddings"""
+   
     try:
         sentences = [s for s in sent_tokenize(text) if len(s) > 10]
         if len(sentences) < 4:
@@ -295,11 +281,10 @@ def calculate_semantic_coherence(text):
             sim = np.dot(embeddings[i], embeddings[i+1])
             similarities.append(sim)
         
-        # AI text tends to have higher average similarity
+      
         avg_sim = np.mean(similarities)
         std_sim = np.std(similarities)
-        
-        # Score based on combination of factors
+     
         coherence_score = min(100, max(0,
             (avg_sim * 60) + (std_sim * 40)
         ))
@@ -309,13 +294,13 @@ def calculate_semantic_coherence(text):
         return 50
 
 def detect_ai_patterns(text):
-    """Advanced pattern detection"""
+
     patterns = [
-        (r'\b(very|quite|rather|somewhat|extremely)\b', 5),  # Excessive qualifiers
-        (r'^(in today\'s world|throughout history|it is important)', 10),  # Generic openings
-        (r'\b(may|might|could|potentially|possibly)\b', 3),  # Hedging
-        (r'\b(as an ai|as a language model)\b', 20),  # AI disclosures
-        (r'\b(in summary|to conclude|overall)\b', 7)  # Formulaic conclusions
+        (r'\b(very|quite|rather|somewhat|extremely)\b', 5),  
+        (r'^(in today\'s world|throughout history|it is important)', 10), 
+        (r'\b(may|might|could|potentially|possibly)\b', 3), 
+        (r'\b(as an ai|as a language model)\b', 20),  
+        (r'\b(in summary|to conclude|overall)\b', 7)  
     ]
     
     score = 0
@@ -326,11 +311,9 @@ def detect_ai_patterns(text):
         
     return min(100, score)
 
-# ======================
-# NUCLEAR DETECTION CORE
-# ======================
+
 def analyze_text(text):
-    """Ultimate AI detection with all enhancements"""
+  
     result = {
         'score': 0,
         'confidence': 0,
@@ -341,18 +324,18 @@ def analyze_text(text):
         'warnings': []
     }
     
-    # Enhanced input validation
+
     if not text or not isinstance(text, str):
         result['error'] = 'Invalid text input'
         return result
         
     text = text.strip()
-    if len(text) < 200:  # Increased minimum
+    if len(text) < 200:  
         result['error'] = 'Text too short (minimum 200 characters required)'
         return result
     
     try:
-        # Basic text statistics
+
         try:
             words = word_tokenize(text)
             sentences = sent_tokenize(text)
@@ -366,7 +349,7 @@ def analyze_text(text):
             result['error'] = 'Text processing error'
             return result
         
-        # Feature analysis
+  
         features = {
             'perplexity': calculate_perplexity(text),
             'burstiness': calculate_burstiness(text),
@@ -377,7 +360,7 @@ def analyze_text(text):
         }
         result['features'] = features
         
-        # Model predictions with confidence
+
         model_scores = []
         confidences = []
         
@@ -403,9 +386,9 @@ def analyze_text(text):
                 })
                 result['warnings'].append(f"{model_cfg['name']} returned low confidence")
         
-        # Calculate final score with nuclear fusion
+   
         if model_scores:
-            # Weighted average with confidence
+
             total_weight = sum(
                 model_cfg['weight'] * conf 
                 for model_cfg, conf in zip(DETECTION_MODELS, confidences)
@@ -429,7 +412,7 @@ def analyze_text(text):
                 0.15 * features['ai_patterns']
             )
             
-            # Apply correlation boosting
+    
             boost_factor = 1.0
             if features['perplexity'] > 75 and features['burstiness'] > 80:
                 boost_factor *= 1.25
@@ -440,7 +423,7 @@ def analyze_text(text):
                 
             final_score = min(100, ((model_avg * 0.80) + (feature_score * 0.20)) * boost_factor)
         else:
-            # Fallback to feature-only analysis
+         
             feature_score = (
                 0.30 * features['perplexity'] +
                 0.25 * features['burstiness'] +
@@ -450,8 +433,7 @@ def analyze_text(text):
             )
             final_score = feature_score
             result['warnings'].append("Using fallback analysis (models unavailable)")
-        
-        # Calculate overall confidence
+
         active_models = sum(1 for m in result['model_details'] if m['status'] == 'success')
         model_confidence = (active_models / len(DETECTION_MODELS)) * 100
         
@@ -462,8 +444,7 @@ def analyze_text(text):
         
         result['score'] = min(100, max(0, final_score))
         result['confidence'] = min(100, (model_confidence * 0.6 + feature_agreement * 0.4))
-        
-        # Generate detailed indicators
+     
         indicators = []
         if features['perplexity'] > 75:
             indicators.append(f"Low lexical diversity (score: {features['perplexity']:.1f})")
@@ -486,13 +467,10 @@ def analyze_text(text):
         result['error'] = 'System error during analysis'
         
     return result
-
-# ======================
-# DJANGO VIEW (ENHANCED)
-# ======================
+    
 @csrf_exempt
 def check_plagiarism(request):
-    """Military-grade detection endpoint"""
+   
     context = {
         'text': '',
         'error': None,
@@ -509,18 +487,17 @@ def check_plagiarism(request):
                 context['error'] = 'Please enter text to analyze'
                 return render(request, 'plagiarism_checker/check.html', context)
                 
-            if len(word_tokenize(text)) < 100:  # Higher minimum
+            if len(word_tokenize(text)) < 100:  
                 context['error'] = 'Minimum 100 words required for accurate analysis'
                 return render(request, 'plagiarism_checker/check.html', context)
             
-            # Perform analysis
+       
             analysis = analyze_text(text)
             
             if analysis.get('error'):
                 context['error'] = analysis['error']
                 return render(request, 'plagiarism_checker/check.html', context)
-            
-            # Enhanced risk classification
+         
             score = analysis['score']
             confidence = analysis['confidence']
             
@@ -537,7 +514,6 @@ def check_plagiarism(request):
             else:
                 risk = ('Likely Human', 'success', '<50% AI probability', 'Probably human-written')
             
-            # Prepare detailed report
             model_details = []
             for model in analysis.get('model_details', []):
                 model_details.append({
@@ -585,11 +561,10 @@ def check_plagiarism(request):
         context
     )
 def home(request):
-    """Simple home view"""
     return render(request, 'plagiarism_checker/home.html')
 
 def results_view(request):
-    """Handle results page view"""
+
     if request.method == 'POST':
         return check_plagiarism(request)
     return redirect('check_plagiarism')
