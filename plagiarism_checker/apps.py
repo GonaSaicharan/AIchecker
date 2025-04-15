@@ -6,9 +6,9 @@ class PlagiarismCheckerConfig(AppConfig):
     name = 'plagiarism_checker'
 
     def ready(self):
-        # Ensure NLTK data is available
+     
         try:
             nltk.download('punkt_tab', download_dir='C:/Users/saich/nltk_data')
-            nltk.download('punkt')  # Also ensure base punkt is available
+            nltk.download('punkt') 
         except Exception as e:
             print(f"NLTK download error: {e}")
