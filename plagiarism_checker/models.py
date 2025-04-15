@@ -6,4 +6,4 @@ class PlagiarismCheck(models.Model):
 
     def __str__(self):
         return f"Checked on {self.checked_at}"
-# Create your models here.
+
