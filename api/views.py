@@ -13,10 +13,10 @@ import json
 
 @csrf_exempt
 def check_plagiarism(request):
-    """Enhanced plagiarism check view with proper error handling"""
-    if request.method == 'POST':
+ 
+    if request.method == 'POST'
         try:
-            # Handle both form data and JSON payloads
+          
             if request.content_type == 'application/json':
                 data = json.loads(request.body)
                 text = data.get('text', '').strip()
@@ -29,10 +29,8 @@ def check_plagiarism(request):
                     "status": "failed"
                 }, status=400)
 
-            # Your actual plagiarism detection logic here
-            results = enhanced_check_plagiarism(text)  # Use your existing function
+            results = enhanced_check_plagiarism(text)
             
-            # Example response structure - modify with your actual data
             return JsonResponse({
                 "status": "success",
                 "results": {
